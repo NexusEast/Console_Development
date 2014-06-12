@@ -15,5 +15,3 @@ speeds up the assembly time. It requires the included msvcr110.dll file.
 
 This will/should still work with any recent build of cc65 as well, this modified 
 ca65 is included because it is a bit (a lot) quicker.
-
--Movax12
