@@ -1,0 +1,19 @@
+Building:
+
+NOTE: "src\smb_chr.chr" is required to assemble. (Not included.)
+
+Run either build.bat, or build_debug.bat
+
+They both will build the .nes rom, but one will also output debug data. 
+(Try it and load the rom in NintendulatorDX and step through the code.)
+Clean.bat will just delete all files in that could be created by either build.bat
+in this default layout: There is no make/makefile.
+
+In the bin folder is a fairly recent build of cc65 binaries for win32 with
+a copy of ca65.exe built by thefox with MSVS2012 with some optimizations that
+speeds up the assembly time. It requires the included msvcr110.dll file. 
+
+This will/should still work with any recent build of cc65 as well, this modified 
+ca65 is included because it is a bit (a lot) quicker.
+
+-Movax12

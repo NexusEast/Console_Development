@@ -1,0 +1,3 @@
+copy 8k 
+"smb_chr.chr"
+file to this folder
