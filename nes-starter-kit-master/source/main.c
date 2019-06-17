@@ -50,6 +50,8 @@ void main(void)
     gameState = GAME_STATE_SYSTEM_INIT;
     while (1)
     {
+        // Seed the random number generator here, using the time since console power on as a seed
+        set_rand(frameCount);
         everyOtherCycle = !everyOtherCycle;
         switch (gameState)
         {
@@ -61,7 +63,7 @@ void main(void)
         case GAME_STATE_TITLE_DRAW:
             banked_call(PRG_BANK_CUSTOM_TITLE, draw_custom_title);
             delay(60);
-            music_play(SONG_TITLE);
+            // music_play(SONG_TITLE);
             fade_in_custom(10);
             delay(30);
             tempChar1 = 0;
@@ -72,19 +74,29 @@ void main(void)
             flash_start_text(30);
             break;
         case GAME_STATE_START_PRESSED:
-            for (i = 0; i < 60; ++i)
+            for (i = 0; i < 30; ++i)
             {
                 flash_start_text(1);
                 delay(2);
             }
-            gameState = GAME_STATE_AREA_SELECT;
-            music_stop();
+            // music_stop();
             fade_out_custom(10);
-            delay(30);
+            delay(30);  
+            if (rand8() >= 250) 
+            { 
+                draw_area_select_fatal();
+            }
+            else 
+            { 
+                draw_area_select();
+            }
+            gameState = GAME_STATE_AREA_SELECT; 
+            fade_in(); 
+
             break;
-        case GAME_STATE_AREA_SELECT:
-            
-        break;
+        case GAME_STATE_AREA_SELECT:  
+            handle_area_selection_input(); 
+             break;
         case GAME_STATE_POST_TITLE:
 
             load_map();
@@ -97,9 +109,6 @@ void main(void)
             ppu_off();
             banked_call(PRG_BANK_HUD, draw_hud);
             ppu_on_all();
-
-            // Seed the random number generator here, using the time since console power on as a seed
-            set_rand(frameCount);
 
             // Map drawing is complete; let the player play the game!
             music_play(SONG_OVERWORLD);

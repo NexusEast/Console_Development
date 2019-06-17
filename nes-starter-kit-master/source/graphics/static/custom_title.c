@@ -4,6 +4,9 @@
 #include "source/globals.h"
 #include "source/neslib_asm/neslib.h"
 
+#define FATAL_MODE 2
+#define NORMAL_MODE 1
+
 void flash_start_text(unsigned char interval)
 {
     if (tempChar2 > interval)
@@ -21,6 +24,39 @@ void flash_start_text(unsigned char interval)
         tempChar2 = 0;
     }
     ++tempChar2;
+}
+
+void handle_area_selection_input(void)
+{
+    if (tempChar1 == FATAL_MODE)
+    { 
+        tempChar2 = rand8() % 10 - 5;
+        tempChar3 = rand8() % 10 - 5;
+        scroll(tempChar2, tempChar3);
+    }
+}
+void draw_area_select(void)
+{
+    ppu_off();
+    vram_inc(0);
+    vram_adr(NAMETABLE_A);
+    pal_bg(area_select_normal_palette);
+    pal_spr(area_select_normal_palette);
+    vram_unrle(area_select_normal_rle);
+    ppu_on_all();
+    tempChar1 = NORMAL_MODE;
+}
+
+void draw_area_select_fatal(void)
+{
+    ppu_off();
+    vram_inc(0);
+    vram_adr(NAMETABLE_A);
+    pal_bg(area_select_fatal_palette);
+    pal_spr(area_select_fatal_palette);
+    vram_unrle(area_select_fatal_rle);
+    ppu_on_all();
+    tempChar1 = FATAL_MODE;
 }
 void draw_custom_title(void)
 {
@@ -49,7 +85,7 @@ void handle_custom_title_input(void)
 {
     if (pad_trigger(0) & PAD_START)
     {
-        gameState = GAME_STATE_START_PRESSED; 
+        gameState = GAME_STATE_START_PRESSED;
         tempChar1 = 0;
         tempChar2 = 0;
     }

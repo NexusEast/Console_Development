@@ -12,7 +12,18 @@ _custom_title_nametable_rle:
 _custom_title_palette: 
     .incbin "graphics/static/title.pal"
 
+_area_select_normal_rle:
+    .incbin "graphics/static/area_normal.rle" 
+_area_select_normal_palette: 
+    .incbin "graphics/static/area_normal.pal"
+    
+_area_select_fatal_rle:
+    .incbin "graphics/static/area_fatal.rle" 
+_area_select_fatal_palette: 
+    .incbin "graphics/static/area_fatal.pal" 
+
 ; The .export command tells our assembler that these are meant to be available to C. So does the name...
 ; both do that. There's more complex details, but if I'm honest I don't know them myself, so I can't document
 ; them here.
-.export _custom_title_nametable_rle, _custom_title_palette
+.export _custom_title_nametable_rle, _custom_title_palette,_area_select_normal_rle, _area_select_normal_palette,_area_select_fatal_rle, _area_select_fatal_palette
+ 
