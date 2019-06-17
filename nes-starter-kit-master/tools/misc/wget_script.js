@@ -1,0 +1,15 @@
+/* Quick-n-dirty script to download a binary file, so we aren't bundling an old version of the cygwin installer */
+// Hat tip: https://superuser.com/a/536400
+// Usage: cscript /nolog wget_script.js http://path/to.file save.file
+
+var WinHttpReq = new ActiveXObject("WinHttp.WinHttpRequest.5.1");
+WinHttpReq.Open("GET", WScript.Arguments(0), /*async=*/false);
+WinHttpReq.Send();
+
+BinStream = new ActiveXObject("ADODB.Stream");
+BinStream.Type = 1;
+BinStream.Open();
+BinStream.Write(WinHttpReq.ResponseBody);
+BinStream.SaveToFile(WScript.Arguments(1));
+
+

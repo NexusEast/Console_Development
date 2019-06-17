@@ -77,13 +77,16 @@ void main(void)
                 flash_start_text(1);
                 delay(2);
             }
-            gameState = GAME_STATE_POST_TITLE;
-            break;
-        case GAME_STATE_POST_TITLE:
-
+            gameState = GAME_STATE_AREA_SELECT;
             music_stop();
             fade_out_custom(10);
             delay(30);
+            break;
+        case GAME_STATE_AREA_SELECT:
+            
+        break;
+        case GAME_STATE_POST_TITLE:
+
             load_map();
 
             banked_call(PRG_BANK_MAP_LOGIC, draw_current_map_to_a);
