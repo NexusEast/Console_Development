@@ -34,6 +34,9 @@ void handle_area_selection_input(void)
         tempChar3 = rand8() % 10 - 5;
         scroll(tempChar2, tempChar3);
     }
+        
+    // ++tempChar5;
+    // tempChar4 = oam_spr(tempChar5,tempChar5, 0x77, 0,tempChar4); 
 }
 void draw_area_select(void)
 {
