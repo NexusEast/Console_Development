@@ -90,12 +90,14 @@ void main(void)
             { 
                 draw_area_select();
             }
-            gameState = GAME_STATE_AREA_SELECT; 
+            gameState = GAME_STATE_AREA_SELECT;  
+
+            load_map(); 
             fade_in(); 
 
             break;
         case GAME_STATE_AREA_SELECT:  
-            handle_area_selection_input(); 
+            handle_area_selection_input();  
              break;
         case GAME_STATE_POST_TITLE:
 
@@ -111,7 +113,7 @@ void main(void)
             ppu_on_all();
 
             // Map drawing is complete; let the player play the game!
-            music_play(SONG_OVERWORLD);
+            // music_play(SONG_OVERWORLD);
             fade_in();
             gameState = GAME_STATE_RUNNING;
             break;
